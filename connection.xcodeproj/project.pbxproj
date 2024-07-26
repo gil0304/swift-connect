@@ -300,9 +300,11 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = TJNUGC69RA;
+				DEVELOPMENT_TEAM = V7EPKJW7KG;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = connection/Info.plist;
+				INFOPLIST_KEY_NSBluetoothAlwaysUsageDescription = "このアプリは、他のデバイスと通信するためにBluetoothを使用します。";
+				INFOPLIST_KEY_NSLocalNetworkUsageDescription = "このアプリは、ローカルネットワークデバイスと通信するためにネットワークを使用します。";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
@@ -313,7 +315,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.gil.connection;
+				PRODUCT_BUNDLE_IDENTIFIER = com.gil.test.connection;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -328,9 +330,11 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = TJNUGC69RA;
+				DEVELOPMENT_TEAM = V7EPKJW7KG;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = connection/Info.plist;
+				INFOPLIST_KEY_NSBluetoothAlwaysUsageDescription = "このアプリは、他のデバイスと通信するためにBluetoothを使用します。";
+				INFOPLIST_KEY_NSLocalNetworkUsageDescription = "このアプリは、ローカルネットワークデバイスと通信するためにネットワークを使用します。";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
@@ -341,7 +345,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.gil.connection;
+				PRODUCT_BUNDLE_IDENTIFIER = com.gil.test.connection;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
