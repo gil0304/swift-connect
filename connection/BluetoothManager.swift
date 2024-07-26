@@ -23,15 +23,29 @@ class BluetoothManager: NSObject, CBPeripheralManagerDelegate, CBCentralManagerD
         self.peerID = MCPeerID(displayName: UIDevice.current.name)
         self.mcSession = MCSession(peer: peerID, securityIdentity: nil, encryptionPreference: .required)
         self.mcSession.delegate = self
+
+        // サービスの初期化
+        initializeServices()
+    }
+
+    func initializeServices() {
         self.mcAdvertiserAssistant = MCNearbyServiceAdvertiser(peer: peerID, discoveryInfo: nil, serviceType: "example-service")
         self.mcAdvertiserAssistant.delegate = self
         self.mcNearbyServiceBrowser = MCNearbyServiceBrowser(peer: peerID, serviceType: "example-service")
         self.mcNearbyServiceBrowser.delegate = self
 
-        // アドバタイズの開始
+        // サービスの開始
+        startServices()
+    }
+
+    func startServices() {
         self.mcAdvertiserAssistant.startAdvertisingPeer()
-        // 周辺のサービスを検索
         self.mcNearbyServiceBrowser.startBrowsingForPeers()
+    }
+
+    func stopServices() {
+        self.mcAdvertiserAssistant.stopAdvertisingPeer()
+        self.mcNearbyServiceBrowser.stopBrowsingForPeers()
     }
 
     // CBPeripheralManagerDelegateのメソッド
@@ -55,12 +69,17 @@ class BluetoothManager: NSObject, CBPeripheralManagerDelegate, CBCentralManagerD
     // MCSessionDelegateのメソッド
     func session(_ session: MCSession, peer peerID: MCPeerID, didChange state: MCSessionState) {
         if state == .connected {
-            showAlert(with: "すれ違ったBluetooth", message: "\(peerID.displayName) とすれ違いました")
+            showAlert(with: "すれ違った", message: "\(peerID.displayName) とすれ違いました")
+
+            // 数字の1を送信
+            sendData(data: 1)
         }
     }
 
     func session(_ session: MCSession, didReceive data: Data, fromPeer peerID: MCPeerID) {
-        // データ受信時の処理
+        // 数字のデータをデコードして表示
+        let receivedNumber = data.withUnsafeBytes { $0.load(as: Int.self) }
+        showAlert(with: "メッセージを受信", message: "受信した番号: \(receivedNumber)")
     }
 
     func session(_ session: MCSession, didReceive stream: InputStream, withName streamName: String, fromPeer peerID: MCPeerID) {
@@ -73,6 +92,19 @@ class BluetoothManager: NSObject, CBPeripheralManagerDelegate, CBCentralManagerD
 
     func session(_ session: MCSession, didFinishReceivingResourceWithName resourceName: String, fromPeer peerID: MCPeerID, at localURL: URL?, withError error: Error?) {
         // リソース受信完了時の処理
+    }
+
+    // データ送信メソッド
+    func sendData(data: Int) {
+        if mcSession.connectedPeers.count > 0 {
+            var dataToSend = data
+            let data = Data(bytes: &dataToSend, count: MemoryLayout.size(ofValue: dataToSend))
+            do {
+                try mcSession.send(data, toPeers: mcSession.connectedPeers, with: .reliable)
+            } catch {
+                print("Error sending data: \(error.localizedDescription)")
+            }
+        }
     }
 
     // MCNearbyServiceAdvertiserDelegateのメソッド
