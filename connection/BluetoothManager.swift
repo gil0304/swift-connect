@@ -69,7 +69,7 @@ class BluetoothManager: NSObject, CBPeripheralManagerDelegate, CBCentralManagerD
     // MCSessionDelegateのメソッド
     func session(_ session: MCSession, peer peerID: MCPeerID, didChange state: MCSessionState) {
         if state == .connected {
-            showAlert(with: "すれ違った", message: "\(peerID.displayName) とすれ違いました")
+//            showAlert(with: "すれ違った", message: "\(peerID.displayName) とすれ違いました")
 
             // 数字の1を送信
             sendData(data: 1)
